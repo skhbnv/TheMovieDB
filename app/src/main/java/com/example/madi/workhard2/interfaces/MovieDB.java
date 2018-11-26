@@ -1,5 +1,6 @@
 package com.example.madi.workhard2.interfaces;
 
+import com.example.madi.workhard2.Objects.Result;
 import com.example.madi.workhard2.Objects.TopRatedMovie;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface MovieDB {
     @GET("3/movie/top_rated")
-    Call<ArrayList<TopRatedMovie>> getData(@Query("api_key") String key,
-                                           @Query("language") String lang,
-                                           @Query("page") int page);
+    Call<ArrayList<Result>> getData(@Query("api_key") String key,
+                                    @Query("language") String lang,
+                                    @Query("page") int page);
 }

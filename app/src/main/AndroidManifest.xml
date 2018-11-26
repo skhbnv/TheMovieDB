@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".Objects.App"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".Main">
             <intent-filter>

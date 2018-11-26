@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.madi.workhard2.Adapter;
 import com.example.madi.workhard2.Objects.App;
 import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.Objects.Result;
 import com.example.madi.workhard2.Objects.TopRatedMovie;
 import com.example.madi.workhard2.R;
 import com.example.madi.workhard2.interfaces.MovieDB;
@@ -67,17 +68,16 @@ public class PopularFragment extends Fragment {
     public void getResponse() {
         App.getApi().
                 getData("196f6483e4f6e361d943a20014f51698", "ru", 1).
-                enqueue(new Callback<ArrayList<TopRatedMovie>>() {
-            @Override
-            public void onResponse(Call<ArrayList<TopRatedMovie>> call,
-                                   Response<ArrayList<TopRatedMovie>> response) {
-                Log.d("___", "onResponse: response!");
-            }
+                enqueue(new Callback<ArrayList<Result>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Result>> call, Response<ArrayList<Result>> response) {
+                        Log.d("___", "onResponse: response! " + response);
+                    }
 
-            @Override
-            public void onFailure(Call<ArrayList<TopRatedMovie>> call, Throwable t) {
-
-            }
-        });
+                    @Override
+                    public void onFailure(Call<ArrayList<Result>> call, Throwable t) {
+                        Log.d("___", "onFailure: failure " + t.toString());
+                    }
+                });
     }
 }
