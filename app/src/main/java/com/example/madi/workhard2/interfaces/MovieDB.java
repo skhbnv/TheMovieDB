@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface MovieDB {
     @GET("3/movie/top_rated")
-    Call<ArrayList<Result>> getData(@Query("api_key") String key,
+    Call<TopRatedMovie> getData(@Query("api_key") String key,
                                     @Query("language") String lang,
                                     @Query("page") int page);
 }

@@ -68,15 +68,15 @@ public class PopularFragment extends Fragment {
     public void getResponse() {
         App.getApi().
                 getData("196f6483e4f6e361d943a20014f51698", "ru", 1).
-                enqueue(new Callback<ArrayList<Result>>() {
+                enqueue(new Callback<TopRatedMovie>() {
                     @Override
-                    public void onResponse(Call<ArrayList<Result>> call, Response<ArrayList<Result>> response) {
-                        Log.d("___", "onResponse: response! " + response);
+                    public void onResponse(Call<TopRatedMovie> call, Response<TopRatedMovie> response) {
+                        Log.d("___", "onResponse: " + response);
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<Result>> call, Throwable t) {
-                        Log.d("___", "onFailure: failure " + t.toString());
+                    public void onFailure(Call<TopRatedMovie> call, Throwable t) {
+                        Log.d("___", "onFailure: " + t.toString());
                     }
                 });
     }
