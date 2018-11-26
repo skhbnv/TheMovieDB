@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.madi.workhard2.Adapter;
 import com.example.madi.workhard2.Objects.App;
@@ -17,44 +18,31 @@ import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.Objects.Result;
 import com.example.madi.workhard2.Objects.TopRatedMovie;
 import com.example.madi.workhard2.R;
-import com.example.madi.workhard2.interfaces.MovieDB;
+import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PopularFragment extends Fragment {
+import static android.content.ContentValues.TAG;
+
+public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Object popularResponse;
-    private Object rsponse;
 
+    private List<TopRatedMovie> dataset = new ArrayList<>();
 
     public PopularFragment(){ }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Movies> dataset = new ArrayList<>();
-
         getResponse();
-//        dataset.add(new Movies("Adjara Gudju", "Atata"));
-//        dataset.add(new Movies("Adjara Gudju", "Atata"));
-//        dataset.add(new Movies("Adjara Gudju", "Atata"));
-
-        mRecyclerView = getView().findViewById(R.id.popular_recylcer);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new Adapter(dataset);
-        mRecyclerView.setAdapter(mAdapter);
     }
-
 
     @Nullable
     @Override
@@ -64,20 +52,33 @@ public class PopularFragment extends Fragment {
         return view;
     }
 
-
     public void getResponse() {
         App.getApi().
                 getData("196f6483e4f6e361d943a20014f51698", "ru", 1).
-                enqueue(new Callback<TopRatedMovie>() {
+                enqueue(new Callback<Result>() {
                     @Override
-                    public void onResponse(Call<TopRatedMovie> call, Response<TopRatedMovie> response) {
-                        Log.d("___", "onResponse: " + response);
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        onDataLoaded(response.body().getResults());
+                        Log.d("___", "onResponse: " + response.body().getResults().
+                                get(0).getTitle());
                     }
 
                     @Override
-                    public void onFailure(Call<TopRatedMovie> call, Throwable t) {
-                        Log.d("___", "onFailure: " + t.toString());
+                    public void onFailure(Call<Result> call, Throwable t) {
+                        Log.d("___", "onResponse: " + t.toString());
+                        Toast.makeText(getContext(),t.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    @Override
+    public void onDataLoaded(List<TopRatedMovie> result) {
+        dataset = result;
+        mRecyclerView = getView().findViewById(R.id.popular_recylcer);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new Adapter(dataset);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
