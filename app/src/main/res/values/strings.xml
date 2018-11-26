@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WorkHard2</string>
+    <string name="profile">profile</string>
+    <string name="messages">messages</string>
+    <string name="main_page">main page</string>
+    <string name="all_movies">All movies</string>
+    <string name="top_rated">Top rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="popular">Popular</string>
+    <string name="now_playing">Now playing</string>
+    <string name="Latest">Latest</string>
+    <string name="movieposter">MoviePoster</string>
+</resources>
