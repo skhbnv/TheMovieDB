@@ -1,5 +1,6 @@
 package com.example.madi.workhard2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,12 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.madi.workhard2.fragments.MainPageFragment;
 import com.example.madi.workhard2.fragments.PopularFragment;
 import com.example.madi.workhard2.fragments.TopRatedFragment;
+import com.example.madi.workhard2.interfaces.ItemCreatedInterface;
 
-public class Main extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity{
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -34,6 +37,7 @@ public class Main extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         contentChanger(R.id.user_all_movies);
         initUI();
 

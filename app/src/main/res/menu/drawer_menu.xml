@@ -10,11 +10,14 @@
         <item
             android:icon="@drawable/download"
             android:id="@+id/user_popular"
-            android:title="@string/popular"/>
+            android:title="@string/top_rated"
+            />
         <item
             android:icon="@drawable/icon"
             android:id="@+id/user_top_rated"
-            android:title="@string/top_rated"/>
+            android:title="@string/popular"
+
+            />
         <item
             android:icon="@drawable/ic_arrow_upward_black_24dp"
             android:id="@+id/user_upcoming"

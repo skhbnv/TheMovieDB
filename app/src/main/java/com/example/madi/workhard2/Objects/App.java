@@ -17,7 +17,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ArrayList<Movies> popularArray = new ArrayList<>();
         retrofit = new Retrofit.Builder().
                 baseUrl("https://api.themoviedb.org").
                 addConverterFactory(GsonConverterFactory.create()).

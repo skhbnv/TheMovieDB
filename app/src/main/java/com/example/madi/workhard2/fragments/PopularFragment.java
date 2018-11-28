@@ -1,5 +1,6 @@
 package com.example.madi.workhard2.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.madi.workhard2.ActivityTheMoviePage;
 import com.example.madi.workhard2.Adapter;
 import com.example.madi.workhard2.Objects.App;
-import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.Objects.Result;
-import com.example.madi.workhard2.Objects.TopRatedMovie;
+import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.R;
+import com.example.madi.workhard2.interfaces.ItemClickListener;
+import com.example.madi.workhard2.interfaces.ItemCreatedInterface;
 import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
 
 import java.util.ArrayList;
@@ -27,14 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.ContentValues.TAG;
-
-public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded{
+public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded, ItemCreatedInterface{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private List<TopRatedMovie> dataset = new ArrayList<>();
+    private List<Movies> dataset = new ArrayList<>();
 
     public PopularFragment(){ }
 
@@ -59,8 +60,7 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
                         onDataLoaded(response.body().getResults());
-                        Log.d("___", "onResponse: " + response.body().getResults().
-                                get(0).getTitle());
+
                     }
 
                     @Override
@@ -72,7 +72,7 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
     }
 
     @Override
-    public void onDataLoaded(List<TopRatedMovie> result) {
+    public void onDataLoaded(List<Movies> result) {
         dataset = result;
         mRecyclerView = getView().findViewById(R.id.popular_recylcer);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -80,5 +80,12 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
 
         mAdapter = new Adapter(dataset);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemCreated(String id) {
+        Intent intent = new Intent(getContext(), ActivityTheMoviePage.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 }

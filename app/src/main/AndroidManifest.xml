@@ -15,12 +15,12 @@
         android:theme="@style/AppTheme"
         android:name=".Objects.App"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".Main">
+        <activity android:name=".ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> <activity android:name=".ActivityTheMoviePage"/>
     </application>
 
 </manifest>
