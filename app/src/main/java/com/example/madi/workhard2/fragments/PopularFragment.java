@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.madi.workhard2.Adapter;
@@ -28,8 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded,
-        OnItemCreatedListener {
+public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -77,12 +77,7 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new Adapter(dataset);
-        mAdapter.setOnItemCreatedListener(this); //не видит
+
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onCreate(String id) {
-
     }
 }

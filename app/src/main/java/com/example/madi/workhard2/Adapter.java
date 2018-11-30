@@ -22,10 +22,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         mData = dataset;
     }
     ItemClickListener itemClickListener;
-    private OnItemCreatedListener itemCreatedListener;
 
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder
+    public class MovieViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener{
         private TextView mName;
         private TextView mGenre;
@@ -33,8 +32,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         private TextView mDate;
         private Context context;
         private ItemClickListener itemClickListener;
-
-
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,13 +45,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
 
         @Override
         public void onClick(View v) {
-            itemClickListener.onClick(v, getAdapterPosition());
+            itemClickListener.onClick(mData.get(getAdapterPosition()));
         }
+    }
 
-
-        public void setItemClickListener(ItemClickListener itemClickListener){
-            this.itemClickListener = itemClickListener;
-        }
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -63,33 +59,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         View v =  LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.movie_card, viewGroup, false);
         MovieViewHolder vh = new MovieViewHolder(v);
-
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MovieViewHolder movieViewHolder, int i) {
+        onBindMovieHolder(movieViewHolder, i);
+    }
+
+    void onBindMovieHolder(@NonNull final MovieViewHolder movieViewHolder, int i){
         movieViewHolder.mName.setText(mData.get(i).getTitle());
         String year[] = mData.get(i).getReleaseDate().split("-");
         movieViewHolder.mDate.setText(year[0]);
         String id = mData.get(i).getId().toString();
-
-        movieViewHolder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                String id = mData.get(position).getId().toString();
-            }
-        });
-
         String url = "http://image.tmdb.org/t/p/w780" + mData.get(i).getPosterPath();
         Picasso.
                 with(movieViewHolder.context).
                 load(url).
                 into(movieViewHolder.mPoster);
-
-    }
-    public void SetOnItemClickListener(final ItemClickListener mItemClickListener) {
-        this.itemClickListener = mItemClickListener;
     }
 
     @Override
