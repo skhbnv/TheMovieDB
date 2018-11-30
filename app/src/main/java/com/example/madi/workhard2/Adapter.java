@@ -11,17 +11,17 @@ import android.widget.TextView;
 
 import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
-import com.example.madi.workhard2.interfaces.ItemCreatedInterface;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
     private List<Movies> mData;
-    private ItemCreatedInterface itemCreatedInterface;
     public Adapter(List<Movies> dataset){
         mData = dataset;
     }
+    ItemClickListener itemClickListener;
+
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mName;
@@ -30,6 +30,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         private TextView mDate;
         private Context context;
         private ItemClickListener itemClickListener;
+
+
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -45,10 +47,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         public void onClick(View v) {
             itemClickListener.onClick(v, getAdapterPosition());
         }
+
+
         public void setItemClickListener(ItemClickListener itemClickListener){
             this.itemClickListener = itemClickListener;
         }
     }
+
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -70,7 +75,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
             @Override
             public void onClick(View view, int position) {
                 String id = mData.get(position).getId().toString();
-                itemCreatedInterface.onItemCreated(id);
             }
         });
 
@@ -81,6 +85,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
                 into(movieViewHolder.mPoster);
 
     }
+    public void SetOnItemClickListener(final ItemClickListener mItemClickListener) {
+        this.itemClickListener = mItemClickListener;
+    }
+
     @Override
     public int getItemCount() {
         return mData.size();
