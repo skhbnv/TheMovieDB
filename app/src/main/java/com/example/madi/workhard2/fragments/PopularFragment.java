@@ -29,7 +29,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded {
+public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded,
+        ItemClickListener{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -77,7 +78,12 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new Adapter(dataset);
-
+        mAdapter.setItemClickListener();        //ne vidit
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onClick(Movies movie) {
+
     }
 }
