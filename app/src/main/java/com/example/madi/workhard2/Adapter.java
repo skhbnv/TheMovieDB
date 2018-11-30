@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
+import com.example.madi.workhard2.interfaces.OnItemCreatedListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,9 +22,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         mData = dataset;
     }
     ItemClickListener itemClickListener;
+    private OnItemCreatedListener itemCreatedListener;
 
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MovieViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener{
         private TextView mName;
         private TextView mGenre;
         private ImageView mPoster;

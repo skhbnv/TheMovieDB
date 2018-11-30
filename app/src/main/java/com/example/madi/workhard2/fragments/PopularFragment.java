@@ -17,7 +17,9 @@ import com.example.madi.workhard2.Objects.App;
 import com.example.madi.workhard2.Objects.Result;
 import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.R;
+import com.example.madi.workhard2.interfaces.ItemClickListener;
 import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
+import com.example.madi.workhard2.interfaces.OnItemCreatedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded{
+public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded,
+        OnItemCreatedListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -74,6 +77,12 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new Adapter(dataset);
+        mAdapter.setOnItemCreatedListener(this); //не видит
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onCreate(String id) {
+
     }
 }
