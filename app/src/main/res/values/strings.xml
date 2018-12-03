@@ -10,4 +10,6 @@
     <string name="now_playing">Now playing</string>
     <string name="Latest">Latest</string>
     <string name="movieposter">MoviePoster</string>
+    <string name="description">Описание:</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
 </resources>

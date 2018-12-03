@@ -1,5 +1,6 @@
 package com.example.madi.workhard2.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,9 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.example.madi.workhard2.ActivityTheMoviePage;
 import com.example.madi.workhard2.Adapter;
 import com.example.madi.workhard2.Objects.App;
 import com.example.madi.workhard2.Objects.Result;
@@ -20,7 +21,6 @@ import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.R;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
 import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
-import com.example.madi.workhard2.interfaces.OnItemCreatedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class PopularFragment extends Fragment implements ListenerOnTopRelatedDownloaded,
         ItemClickListener{
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<Movies> dataset = new ArrayList<>();
@@ -78,12 +78,18 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new Adapter(dataset);
-        mAdapter.setItemClickListener();        //ne vidit
+
+        mAdapter.setItemClickListener(this);        //?? Zachem adapter i zachem this?
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void onClick(Movies movie) {
-
+        Intent intent = new Intent(getContext(), ActivityTheMoviePage.class);
+        Log.d("___", "onClick: canonical name is " + Movies.class.getCanonicalName());
+        intent.putExtra(Movies.class.getCanonicalName(), movie);
+        String id = movie.getId().toString();
+        startActivity(intent);
     }
 }

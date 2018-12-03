@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.madi.workhard2.Objects.Movies;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
-import com.example.madi.workhard2.interfaces.OnItemCreatedListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -31,7 +30,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         private ImageView mPoster;
         private TextView mDate;
         private Context context;
-        private ItemClickListener itemClickListener;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);

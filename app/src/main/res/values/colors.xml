@@ -4,4 +4,5 @@
     <color name="toolbarColor">#C4C4C4</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="ic_colors">#424242</color>
 </resources>
