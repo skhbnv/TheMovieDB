@@ -60,13 +60,12 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
                         onDataLoaded(response.body().getResults());
-
                     }
 
                     @Override
                     public void onFailure(Call<Result> call, Throwable t) {
                         Log.d("___", "onResponse: " + t.toString());
-                        Toast.makeText(getContext(),t.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getContext(),t.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
     }

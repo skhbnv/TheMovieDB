@@ -4,6 +4,7 @@ package com.example.madi.workhard2.Objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -39,7 +40,7 @@ public class Movies implements Parcelable{
     private String originalTitle;
     @SerializedName("genre_ids")
     @Expose
-    private List<Integer> genreIds = null;
+    private List<Integer> genreIds = new ArrayList<>();
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
@@ -81,6 +82,9 @@ public class Movies implements Parcelable{
         } else {
             popularity = in.readDouble();
         }
+
+        in.readList(genreIds, null);
+
         posterPath = in.readString();
         originalLanguage = in.readString();
         originalTitle = in.readString();
@@ -248,6 +252,7 @@ public class Movies implements Parcelable{
             dest.writeByte((byte) 1);
             dest.writeDouble(popularity);
         }
+        dest.writeList(genreIds);
         dest.writeString(posterPath);
         dest.writeString(originalLanguage);
         dest.writeString(originalTitle);

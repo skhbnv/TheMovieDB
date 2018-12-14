@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "925657494423",
+    "firebase_url": "https://workhard2-f5df8.firebaseio.com",
+    "project_id": "workhard2-f5df8",
+    "storage_bucket": "workhard2-f5df8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925657494423:android:b3eecb64b1922099",
+        "android_client_info": {
+          "package_name": "com.example.madi.workhard2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925657494423-1dir4g1genmimsaia0u09349edhoehbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.madi.workhard2",
+            "certificate_hash": "0931158c8a023e14ae286abc13c4be76f4bdaf9a"
+          }
+        },
+        {
+          "client_id": "925657494423-vqu97foatg23l1ql8eg0ovhj6qskrlfo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATctiA857bvAzDnmQUfoE3PdbEAP11H7w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925657494423-vqu97foatg23l1ql8eg0ovhj6qskrlfo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

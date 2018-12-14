@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WorkHard2</string>
+    <string name="app_name">The movie</string>
     <string name="profile">profile</string>
     <string name="messages">messages</string>
     <string name="main_page">main page</string>
@@ -12,4 +12,7 @@
     <string name="movieposter">MoviePoster</string>
     <string name="description">Описание:</string>
     <string name="add_to_favorites">Добавить в избранное</string>
+    <string name="genres">Жанры:</string>
+    <string name="Rating">Рейтинг:</string>
+    <string name="Votes">Голосов:</string>
 </resources>

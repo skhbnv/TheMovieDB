@@ -11,29 +11,41 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.madi.workhard2.Objects.App;
+import com.example.madi.workhard2.Objects.Genre;
+import com.example.madi.workhard2.Objects.Genres;
+import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.Objects.Result;
 import com.example.madi.workhard2.fragments.MainPageFragment;
 import com.example.madi.workhard2.fragments.PopularFragment;
 import com.example.madi.workhard2.fragments.TopRatedFragment;
+import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
+import com.example.madi.workhard2.interfaces.onGenresLoadedListener;
 
-public class ActivityMain extends AppCompatActivity{
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ActivityMain extends AppCompatActivity implements onGenresLoadedListener{
     private DrawerLayout mDrawerLayout;
+    private static List<Genre> genres;
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-        }
-        return super.onOptionsItemSelected(item);
+    static List<Genre> getGenres(){
+        return genres;
     }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getResponseAndFillGenres();
         contentChanger(R.id.user_all_movies);
         initUI();
 
@@ -48,6 +60,37 @@ public class ActivityMain extends AppCompatActivity{
                 return true;
             }
         });
+    }
+
+    private void getResponseAndFillGenres() {
+        App.getApi().
+                getGenres( "196f6483e4f6e361d943a20014f51698", "ru").
+                enqueue(new Callback<Genres>() {
+                    @Override
+                    public void onResponse(Call<Genres> call, Response<Genres> response) {
+                        onGenresLoaded(response.body().getGenres());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Genres> call, Throwable t) {
+
+                    }
+                });
+    }
+    @Override
+    public void onGenresLoaded(List<Genre> resp) {
+        genres = resp;
+        Log.d("___", "onGenresLoaded: " + resp.get(0).getName());
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void contentChanger(int itemId) {

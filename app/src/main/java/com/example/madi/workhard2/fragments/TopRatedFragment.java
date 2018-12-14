@@ -81,6 +81,7 @@ public class TopRatedFragment extends Fragment implements ItemClickListener{
 
     @Override
     public void onClick(Movies movie) {
+//        Log.d("___", "onClick: " + movie.getGenreIds());
         Intent intent = new Intent(getContext(), ActivityTheMoviePage.class);
         intent.putExtra(Movies.class.getCanonicalName(), movie);
         String id = movie.getId().toString();
