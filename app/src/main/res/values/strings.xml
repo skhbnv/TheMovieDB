@@ -15,4 +15,18 @@
     <string name="genres">Жанры:</string>
     <string name="Rating">Рейтинг:</string>
     <string name="Votes">Голосов:</string>
+    <string name="the_movie_db">The movie DB</string>
+    <string name="enter_your_login">enter your login</string>
+    <string name="enter_your_password">enter your password</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="enter">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="title_activity_register">ActivityRegister</string>
+    <string name="sign_in">Зарегистрироваться</string>
+    <string name="create_login">придумайте логин</string>
+    <string name="create_password">придумайте пароль</string>
+    <string name="one_more_time">введите пароль еще раз</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

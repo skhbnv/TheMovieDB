@@ -5,4 +5,7 @@
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
     <color name="ic_colors">#424242</color>
+    <color name="white">#FFF</color>
+    <color name="auth_back">#333333</color>
+    <color name="gold_yellow">#F5CE00</color>
 </resources>

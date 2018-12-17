@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class ActivityTheMoviePage extends AppCompatActivity {
+public class ActivityTheMoviePage extends AppCompatActivity implements View.OnClickListener{
     private TextView mTitle;
     private TextView mGenre;
     private TextView mRating;
@@ -26,6 +27,7 @@ public class ActivityTheMoviePage extends AppCompatActivity {
     private TextView mDescription;
 
     private ImageView mBackgr;
+    private ImageView mBackButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +74,18 @@ public class ActivityTheMoviePage extends AppCompatActivity {
         mTitle = findViewById(R.id.the_movie_page_name);
         mGenre = findViewById(R.id.the_movie_page_genre);
         mBackgr = findViewById(R.id.the_movie_page_backgr);
+        mBackButton= findViewById(R.id.back_button);
         mDescription = findViewById(R.id.the_movie_page_description);
+
+        mBackButton.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.back_button:
+                finish();
+                break;
+        }
+    }
 }

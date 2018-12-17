@@ -16,8 +16,22 @@ public interface MovieDB {
     Call<Result> getDataPopular(@Query("api_key") String key,
                          @Query("language") String lang,
                          @Query("page") int page);
+    @GET("3/movie/upcoming")
+    Call<Result> getDataUpcoming(@Query("api_key") String key,
+                         @Query("language") String lang,
+                         @Query("page") int page);
+
+    @GET("3/movie/latest")
+    Call<Result> getDataLatest(@Query("api_key") String key,
+                         @Query("language") String lang,
+                         @Query("page") int page);
+
+    @GET("3/movie/now_playing")
+    Call<Result> getDataNowPlaying(@Query("api_key") String key,
+                         @Query("language") String lang,
+                         @Query("page") int page);
+
     @GET("3/genre/movie/list")
     Call<Genres> getGenres(@Query("api_key") String key,
                            @Query("language") String lang);
-
 }

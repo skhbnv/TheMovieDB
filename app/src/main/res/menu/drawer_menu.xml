@@ -4,10 +4,6 @@
         android:checkableBehavior="single"
         >
         <item
-            android:id="@+id/user_all_movies"
-            android:icon="@drawable/ic_list_black_24dp"
-            android:title="@string/all_movies"/>
-        <item
             android:icon="@drawable/ic_top_rated"
             android:id="@+id/user_popular"
             android:title="@string/top_rated"
@@ -16,7 +12,6 @@
             android:icon="@drawable/icon"
             android:id="@+id/user_top_rated"
             android:title="@string/popular"
-
             />
         <item
             android:icon="@drawable/ic_arrow_upward_black_24dp"

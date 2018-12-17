@@ -13,20 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.madi.workhard2.Objects.App;
 import com.example.madi.workhard2.Objects.Genre;
 import com.example.madi.workhard2.Objects.Genres;
-import com.example.madi.workhard2.Objects.Movies;
-import com.example.madi.workhard2.Objects.Result;
-import com.example.madi.workhard2.fragments.MainPageFragment;
+import com.example.madi.workhard2.fragments.LatestFragment;
+import com.example.madi.workhard2.fragments.NowPlaying;
 import com.example.madi.workhard2.fragments.PopularFragment;
 import com.example.madi.workhard2.fragments.TopRatedFragment;
-import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
+import com.example.madi.workhard2.fragments.UpcomingFragment;
 import com.example.madi.workhard2.interfaces.onGenresLoadedListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,7 +43,7 @@ public class ActivityMain extends AppCompatActivity implements onGenresLoadedLis
         setContentView(R.layout.activity_main);
 
         getResponseAndFillGenres();
-        contentChanger(R.id.user_all_movies);
+        contentChanger(R.id.user_popular);
         initUI();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -73,7 +70,7 @@ public class ActivityMain extends AppCompatActivity implements onGenresLoadedLis
 
                     @Override
                     public void onFailure(Call<Genres> call, Throwable t) {
-
+                        //toast
                     }
                 });
     }
@@ -97,15 +94,23 @@ public class ActivityMain extends AppCompatActivity implements onGenresLoadedLis
         Fragment fragment = null;
 
         switch (itemId){
-            case R.id.user_all_movies:
-                fragment = new MainPageFragment();
-                break;
             case R.id.user_popular:
                 fragment = new PopularFragment();
                 break;
             case R.id.user_top_rated:
                 fragment = new TopRatedFragment();
+                break;
+            case R.id.user_upcoming:
+                fragment = new UpcomingFragment();
+                break;
+//            case R.id.user_latest:
+//                fragment = new LatestFragment();
+//                break;
+            case R.id.now_playing:
+                fragment = new NowPlaying();
+                break;
         }
+
         if(fragment != null){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().
                     beginTransaction();
