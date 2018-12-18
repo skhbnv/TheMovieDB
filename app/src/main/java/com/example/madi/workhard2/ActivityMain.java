@@ -1,5 +1,6 @@
 package com.example.madi.workhard2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,7 +18,9 @@ import android.view.MenuItem;
 import com.example.madi.workhard2.Objects.App;
 import com.example.madi.workhard2.Objects.Genre;
 import com.example.madi.workhard2.Objects.Genres;
-import com.example.madi.workhard2.fragments.LatestFragment;
+import com.example.madi.workhard2.Objects.Latest;
+import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.fragments.FavoritesFragment;
 import com.example.madi.workhard2.fragments.NowPlaying;
 import com.example.madi.workhard2.fragments.PopularFragment;
 import com.example.madi.workhard2.fragments.TopRatedFragment;
@@ -103,11 +106,14 @@ public class ActivityMain extends AppCompatActivity implements onGenresLoadedLis
             case R.id.user_upcoming:
                 fragment = new UpcomingFragment();
                 break;
-//            case R.id.user_latest:
-//                fragment = new LatestFragment();
-//                break;
+            case R.id.user_latest:
+                loadLatest();
+                break;
             case R.id.now_playing:
                 fragment = new NowPlaying();
+                break;
+            case R.id.favorites:
+                fragment = new FavoritesFragment();
                 break;
         }
 
@@ -117,6 +123,24 @@ public class ActivityMain extends AppCompatActivity implements onGenresLoadedLis
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
         }
+    }
+
+    private void loadLatest() {
+        App.getApi().
+                getDataLatest("196f6483e4f6e361d943a20014f51698", "ru", 1).
+                enqueue(new Callback<Latest>() {
+                    @Override
+                    public void onResponse(Call<Latest> call, Response<Latest> response) {
+                        onDataLoaded(response.body());
+                    }
+                    @Override
+                    public void onFailure(Call<Latest> call, Throwable t) {}});
+    }
+
+    private void onDataLoaded(Latest results) {
+        Intent intent = new Intent(this, ActivityTheLatestPage.class);
+        intent.putExtra(Latest.class.getCanonicalName(), results);
+        startActivity(intent);
     }
 
     private void initUI() {

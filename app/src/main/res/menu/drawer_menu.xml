@@ -25,5 +25,10 @@
             android:icon="@drawable/ic_play_arrow_black_24dp"
             android:id="@+id/now_playing"
             android:title="@string/now_playing"/>
+        <item
+            android:icon="@drawable/favorite"
+            android:id="@+id/favorites"
+            android:title="@string/favorites"/>
+
     </group>
 </menu>

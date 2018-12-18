@@ -10,7 +10,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Movies implements Parcelable{
+    public Movies(){
 
+    }
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;

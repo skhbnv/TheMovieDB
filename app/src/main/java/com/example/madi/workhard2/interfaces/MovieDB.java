@@ -1,6 +1,7 @@
 package com.example.madi.workhard2.interfaces;
 
 import com.example.madi.workhard2.Objects.Genres;
+import com.example.madi.workhard2.Objects.Latest;
 import com.example.madi.workhard2.Objects.Result;
 
 import retrofit2.Call;
@@ -22,9 +23,9 @@ public interface MovieDB {
                          @Query("page") int page);
 
     @GET("3/movie/latest")
-    Call<Result> getDataLatest(@Query("api_key") String key,
-                         @Query("language") String lang,
-                         @Query("page") int page);
+    Call<Latest> getDataLatest(@Query("api_key") String key,
+                               @Query("language") String lang,
+                               @Query("page") int page);
 
     @GET("3/movie/now_playing")
     Call<Result> getDataNowPlaying(@Query("api_key") String key,
