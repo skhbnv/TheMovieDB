@@ -1,4 +1,4 @@
-package com.example.madi.workhard2;
+package com.example.madi.workhard2.activities;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.madi.workhard2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

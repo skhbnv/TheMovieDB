@@ -1,23 +1,12 @@
-package com.example.madi.workhard2;
+package com.example.madi.workhard2.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.madi.workhard2.Objects.Genre;
-import com.example.madi.workhard2.Objects.Genres;
-import com.example.madi.workhard2.Objects.Latest;
-import com.example.madi.workhard2.Objects.Movies;
-import com.example.madi.workhard2.interfaces.MovieDB;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
+import com.example.madi.workhard2.Models.Latest;
+import com.example.madi.workhard2.R;
 
 public class ActivityTheLatestPage extends AppCompatActivity {
     private TextView mTitle;

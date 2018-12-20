@@ -1,4 +1,4 @@
-package com.example.madi.workhard2;
+package com.example.madi.workhard2.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.Models.Movies;
+import com.example.madi.workhard2.R;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +22,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MovieViewHolder>  {
         mData = dataset;
     }
     ItemClickListener itemClickListener;
-
 
     public class MovieViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener{

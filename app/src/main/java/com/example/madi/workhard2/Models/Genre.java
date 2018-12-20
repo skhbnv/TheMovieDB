@@ -1,5 +1,5 @@
 
-package com.example.madi.workhard2.Objects;
+package com.example.madi.workhard2.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

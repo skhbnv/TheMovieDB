@@ -11,13 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.madi.workhard2.ActivityTheMoviePage;
-import com.example.madi.workhard2.Adapter;
-import com.example.madi.workhard2.Objects.App;
-import com.example.madi.workhard2.Objects.Result;
-import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.Models.Recomended_soup;
+import com.example.madi.workhard2.activities.ActivityTheMoviePage;
+import com.example.madi.workhard2.adapters.Adapter;
+import com.example.madi.workhard2.Models.App;
+import com.example.madi.workhard2.Models.Result;
+import com.example.madi.workhard2.Models.Movies;
 import com.example.madi.workhard2.R;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
 import com.example.madi.workhard2.interfaces.ListenerOnTopRelatedDownloaded;
@@ -90,5 +90,10 @@ public class PopularFragment extends Fragment implements ListenerOnTopRelatedDow
         intent.putExtra(Movies.class.getCanonicalName(), movie);
         String id = movie.getId().toString();
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(Recomended_soup movie) {
+
     }
 }

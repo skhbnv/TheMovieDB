@@ -1,5 +1,5 @@
 
-package com.example.madi.workhard2.Objects;
+package com.example.madi.workhard2.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

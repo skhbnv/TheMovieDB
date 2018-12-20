@@ -1,5 +1,5 @@
 
-package com.example.madi.workhard2.Objects;
+package com.example.madi.workhard2.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,6 +13,12 @@ public class Movies implements Parcelable{
     public Movies(){
 
     }
+
+    public Movies(String title, String releaseDate){
+        this.releaseDate = releaseDate;
+        this.title = title;
+    }
+
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;

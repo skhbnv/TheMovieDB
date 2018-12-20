@@ -1,6 +1,6 @@
 package com.example.madi.workhard2.interfaces;
 
-import com.example.madi.workhard2.Objects.Genre;
+import com.example.madi.workhard2.Models.Genre;
 
 import java.util.List;
 

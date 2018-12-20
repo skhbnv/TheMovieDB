@@ -1,4 +1,4 @@
-package com.example.madi.workhard2;
+package com.example.madi.workhard2.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.madi.workhard2.Objects.App;
-import com.example.madi.workhard2.Objects.Genre;
-import com.example.madi.workhard2.Objects.Genres;
-import com.example.madi.workhard2.Objects.Latest;
-import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.Models.App;
+import com.example.madi.workhard2.Models.Genre;
+import com.example.madi.workhard2.Models.Genres;
+import com.example.madi.workhard2.Models.Latest;
+import com.example.madi.workhard2.R;
 import com.example.madi.workhard2.fragments.FavoritesFragment;
 import com.example.madi.workhard2.fragments.NowPlaying;
 import com.example.madi.workhard2.fragments.PopularFragment;

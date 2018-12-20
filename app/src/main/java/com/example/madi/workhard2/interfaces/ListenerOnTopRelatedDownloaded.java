@@ -1,6 +1,6 @@
 package com.example.madi.workhard2.interfaces;
 
-import com.example.madi.workhard2.Objects.Movies;
+import com.example.madi.workhard2.Models.Movies;
 
 import java.util.List;
 

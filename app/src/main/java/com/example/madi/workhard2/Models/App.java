@@ -1,10 +1,8 @@
-package com.example.madi.workhard2.Objects;
+package com.example.madi.workhard2.Models;
 
 import android.app.Application;
 
 import com.example.madi.workhard2.interfaces.MovieDB;
-
-import java.util.ArrayList;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
