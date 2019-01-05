@@ -2,15 +2,20 @@ package com.example.madi.workhard2.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +30,7 @@ import com.example.madi.workhard2.Models.Result;
 import com.example.madi.workhard2.R;
 import com.example.madi.workhard2.adapters.Adapter;
 import com.example.madi.workhard2.adapters.HorizontalAdapter;
+import com.example.madi.workhard2.adapters.HorizontalCastsAdapter;
 import com.example.madi.workhard2.interfaces.ItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,12 +58,20 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
     private TextView mCredits;
     private TextView mRelease;
     private TextView mDescription;
+    private TextView mFavoritesStatus;
+    private DataSnapshot favoritesList;
 
+    private DataSnapshot movieToRemove;
+    private List<Cast> castList;
     private RecyclerView mRecyclerView;
     private HorizontalAdapter mAdapter;
-    private List<Movies> dataset = new ArrayList<>();
     private List<Recomended_soup> dataForHorizontal= new ArrayList<>();
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private RecyclerView mCastsRecycler;
+    private HorizontalCastsAdapter mCastsAdapter;
+    private List<Cast> dataForCasts= new ArrayList<>();
+    private RecyclerView.LayoutManager mCastsLayout;
 
     boolean checker;
 
@@ -70,21 +84,27 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
     private ImageView mBackgr;
     private ImageView mFavButton;
     private ImageView mBackButton;
-    String movieId;
-
-    private int newColor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_movie_page);
 
-
-
-
         initUI();
         loadCredits();
+        openDatabaseConnection();
         }
+
+    private void pushCastsAdapter(List<Cast> castList) {
+        mCastsRecycler = findViewById(R.id.casts_recycler);
+        mCastsLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+                false);
+        mCastsRecycler.setLayoutManager(mCastsLayout);
+        mCastsAdapter = new HorizontalCastsAdapter(castList);
+
+        mCastsRecycler.setAdapter(mCastsAdapter);
+
+    }
 
     private void sendRequestForRecomendations() {
         String movieID = getMovie().getId().toString();
@@ -95,15 +115,15 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
             @Override
             public void onResponse(Call<RecomendedResults> call, Response<RecomendedResults> response) {
                 Log.d("___", "onResponse: " + response.body().getResults());
-//                onDataLoaded(response.body().getResults());
+                onDataLoaded(response.body().getResults());
             }
 
             @Override
             public void onFailure(Call<RecomendedResults> call, Throwable t) {
-
+//                showMessage(t.getMessage());
+                Log.d("___", "onFailure: " + t.getMessage());
             }
         });
-
     }
 
     private void loadCredits() {
@@ -151,15 +171,12 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
 
         String actors = "";
 
-        for(int i = 0; i < 5; i++){
-            actors += cast.get(i).getName()+", ";
-        }
+        pushCastsAdapter(cast);
 
         if (genresList.length() >=3){
             genresList = genresList.substring(0, genresList.length() - 2);
         }
 
-        mCredits.setText(actors);
         mGenre.setText(genresList);
         mRating.setText(getMovie().getVoteAverage().toString());
 
@@ -175,10 +192,11 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
         mTitle = findViewById(R.id.the_movie_page_name);
         mGenre = findViewById(R.id.the_movie_page_genre);
         mBackgr = findViewById(R.id.the_movie_page_backgr);
-        mFavButton = findViewById(R.id.star_fav);
+        mFavButton = findViewById(R.id.star_fav_added);
         mBackButton= findViewById(R.id.back_button);
         mDescription = findViewById(R.id.the_movie_page_description);
         mAddButton = findViewById(R.id.add_to_fav_sec);
+        mFavoritesStatus = findViewById(R.id.text_added_to_favorites);
 
         mAddButton.setOnClickListener(this);
         mBackButton.setOnClickListener(this);
@@ -191,12 +209,47 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.add_to_fav_sec:
-                openDatabaseConnection();
+                favListChecker(favoritesList);
                 break;
         }
     }
-    private void openDatabaseConnection() {
 
+    private void favListChecker(DataSnapshot dataSnapshot) {
+        if(checker){
+            for (DataSnapshot child: dataSnapshot.getChildren()){
+                Movies movie = child.getValue(Movies.class);
+                if(movie.getId().toString().equals(getMovie().getId().toString())){
+                    movieToRemove = child;
+                    movieToRemove.getRef().removeValue();
+                }
+            }
+            checker = false;
+            fillTheStar(false);
+            showMessage("removed from favorites");
+        }else{
+            checker = true;
+        writeToBase();
+        }
+    }
+
+    private void fillTheStar(Boolean added) {
+        if (added){
+            mAddButton.setBackgroundDrawable(ContextCompat.getDrawable(this,
+                    R.drawable.favorites_added));
+            mFavoritesStatus.setText("В избранных");
+            mFavoritesStatus.setTextColor(getResources().getColor(R.color.fav_already_added));
+            mFavButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            mAddButton.setBackgroundDrawable(ContextCompat.getDrawable(this,
+                    R.drawable.favorites_stroke));
+            mFavoritesStatus.setText("Добавить в избранное");
+            mFavoritesStatus.setTextColor(getResources().getColor(R.color.gold_yellow));
+            mFavButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void openDatabaseConnection() {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser;
         String key;
@@ -208,9 +261,6 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
             key = database.getReference("favorites").child(currentUser.getUid()).push().getKey();
             myRef = database.getReference("favorites").
                     child(currentUser.getUid()).child(key);
-
-            //            writeToBase();
-
             checker = false;
             DatabaseReference forCheck = database.getReference("favorites").
                     child(currentUser.getUid());
@@ -218,18 +268,15 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    favoritesList = dataSnapshot;
+
                     for (DataSnapshot child: dataSnapshot.getChildren()){
                         Movies movie = child.getValue(Movies.class);
-                        Log.d("___", "onDataChange: " + movie.getId() + getMovie().getId());
                         if(movie.getId().toString().equals(getMovie().getId().toString())){
-                            Log.d("___", "entered the if statement: " + getMovie().getId());
-                            child.getRef().removeValue();
                             checker = true;
-                            showMessage("removed from favorites");
+                            movieToRemove = child;
+                            fillTheStar(true);
                         }
-                    }
-                    if (!checker){
-                    writeToBase();
                     }
                 }
 
@@ -250,6 +297,7 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
         myRef.setValue(getMovie()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+                fillTheStar(true);
                 if (task.isSuccessful()){
                     showMessage("added to favorites");
                 }
@@ -260,11 +308,11 @@ public class ActivityTheMoviePage extends AppCompatActivity implements View.OnCl
         });
     }
 
-    private void showMessage(String added_to_favorites) {
-        Toast.makeText(this, added_to_favorites, Toast.LENGTH_SHORT).show();
+    private void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-    private void onDataLoaded(List<Recomended_soup> results) {
-        dataForHorizontal = results;
+    private void onDataLoaded(List<Recomended_soup> recomended_soups) {
+        dataForHorizontal = recomended_soups;
 
         mRecyclerView = findViewById(R.id.horizontal_recylcer);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,

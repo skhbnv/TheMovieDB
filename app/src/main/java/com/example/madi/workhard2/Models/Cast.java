@@ -31,6 +31,14 @@ public class Cast {
     @Expose
     private String profilePath;
 
+    Cast(){
+
+    }
+    public Cast(String name, String profilePath){
+        this.name = name;
+        this.profilePath = profilePath;
+    }
+
     public Integer getCastId() {
         return castId;
     }

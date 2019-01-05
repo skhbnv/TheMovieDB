@@ -2,10 +2,12 @@
 <resources>
     <color name="colorPrimary">#ca0b0b</color>
     <color name="toolbarColor">#C4C4C4</color>
-    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorPrimaryDark">#1a1a1d</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="ic_colors">#424242</color>
+    <color name="fav_already_added">#bfbfbf</color>
+    <color name="ic_colors">#505050</color>
     <color name="white">#FFF</color>
     <color name="auth_back">#333333</color>
     <color name="gold_yellow">#F5CE00</color>
+    <color name="black">#000</color>
 </resources>

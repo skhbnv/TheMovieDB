@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.madi.workhard2.Models.Recomended_soup;
@@ -28,6 +30,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.support.v7.widget.LinearLayoutManager.INVALID_OFFSET;
 
 public class TopRatedFragment extends Fragment implements ItemClickListener{
     private Object response;
@@ -73,7 +77,10 @@ public class TopRatedFragment extends Fragment implements ItemClickListener{
 
     private void onDataLoaded(List<Movies> results) {
         mRecyclerView = getView().findViewById(R.id.top_rated_recylcer);
-        mLayoutManager = new LinearLayoutManager(getContext());
+//        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,
+//                false
+//                );
+        mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new Adapter(results);
         mAdapter.setItemClickListener(this);

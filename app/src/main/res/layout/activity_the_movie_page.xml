@@ -131,28 +131,7 @@
 
                </TextView>
            </LinearLayout>
-           <LinearLayout
-               android:layout_height="wrap_content"
-               android:layout_width="match_parent"
-               android:orientation="vertical"
-               >
-               <TextView
-                   android:layout_marginLeft="10dp"
-                   android:text="@string/top_credits"
-                   android:textSize="14sp"
-                   android:layout_height="wrap_content"
-                   android:layout_width="match_parent"
-                   />
-               <TextView
-                   android:layout_marginLeft="10dp"
-                   android:id="@+id/the_movie_page_credits"
-                   android:layout_height="wrap_content"
-                   android:textSize="14sp"
-                   android:layout_width="match_parent"
-                   >
 
-               </TextView>
-           </LinearLayout>
 
        </LinearLayout>
     </LinearLayout>
@@ -171,19 +150,33 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             >
-            <ImageView
-                android:id="@+id/star_fav"
-                android:background="@drawable/ic_star"
+            <RelativeLayout
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:layout_width="20dp"
-                android:contentDescription="TODO" />
-
+                android:gravity="center"
+                android:layout_width="20dp">
+                <ImageView
+                    android:id="@+id/star_fav"
+                    android:background="@drawable/ic_star"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_width="20dp"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:id="@+id/star_fav_added"
+                    android:background="@drawable/star_added"
+                    android:layout_height="20dp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_width="20dp"
+                    android:contentDescription="TODO" />
+            </RelativeLayout>
         </FrameLayout>
         <TextView
+            android:id="@+id/text_added_to_favorites"
             android:text="@string/add_to_favorites"
             android:textSize="15sp"
-            android:textColor="#282828"
+            android:textColor="#F5CE00"
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:layout_width="0dp"
@@ -204,22 +197,61 @@
             android:textColor="@color/ic_colors"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-
             />
+
+     <RelativeLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         >
+
         <TextView
             android:id="@+id/the_movie_page_description"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"/>
 
-        </TextView>
-    </LinearLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/horizontal_recylcer"
+     </RelativeLayout>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="@string/actors"
+            android:textSize="15sp"
+            android:textColor="@color/ic_colors"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="50dp"
-            android:layout_height="150dp"
-            android:background="#020513"
             />
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/casts_recycler"
+            android:layout_width="350dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/the_movie_page_credits"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            />
+    </LinearLayout>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/recomendationss"
+            android:textSize="15sp"
+            android:textColor="@color/ic_colors"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/horizontal_recylcer"
+            android:layout_width="350dp"
+            android:layout_height="195dp"
+            android:layout_marginBottom="20dp"
+            />
 </LinearLayout>
 </ScrollView>

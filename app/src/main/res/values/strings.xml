@@ -32,4 +32,7 @@
     <string name="the_latest">The latest movie page</string>
     <string name="favorites">Favorites</string>
     <string name="top_credits">Актеры:</string>
+    <string name="more">more</string>
+    <string name="actors">Актеры:</string>
+    <string name="recomendationss">С этим фильмом смотрят:</string>
 </resources>

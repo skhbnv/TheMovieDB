@@ -3,9 +3,12 @@ package com.example.madi.workhard2.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,7 +37,8 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoritesFragment extends Fragment implements ItemClickListener {
+public class FavoritesFragment extends Fragment implements ItemClickListener,
+        SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private Adapter mAdapter;
     private List<Movies> dataset = new ArrayList<>();
@@ -42,7 +46,7 @@ public class FavoritesFragment extends Fragment implements ItemClickListener {
     private DatabaseReference baseRef;
     private FirebaseDatabase mDatabase;
 
-    private Object response;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -52,6 +56,12 @@ public class FavoritesFragment extends Fragment implements ItemClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getResponse();
+        initUI();
+    }
+
+    private void initUI() {
+        swipeRefreshLayout = getView().findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
     }
 
     @Override
@@ -103,7 +113,6 @@ public class FavoritesFragment extends Fragment implements ItemClickListener {
                     }
                 }
                 onDataLoaded(data);
-
             }
 
             @Override
@@ -118,14 +127,30 @@ public class FavoritesFragment extends Fragment implements ItemClickListener {
     }
 
     private void onDataLoaded(List<Movies> results) {
-        dataset = results;
-
+        dataset = overTurnTheList(results);
         mRecyclerView = getView().findViewById(R.id.favorites_recycler);
-        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager = new GridLayoutManager(getContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new Adapter(dataset);
         mAdapter.setItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    private List<Movies> overTurnTheList(List<Movies> results) {
+        List<Movies> newList = new ArrayList<>();
+        for (int i = results.size()-1; i >= 0 ; i--){
+            newList.add(results.get(i));
+        }
+        return newList;
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getResponse();
+                swipeRefreshLayout.setRefreshing(false);}
+                }, 5000);
+    }
 }

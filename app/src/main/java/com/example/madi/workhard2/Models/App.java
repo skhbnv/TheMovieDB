@@ -10,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends Application {
     private static MovieDB movieDB;
     private static MovieDB movieGenres;
-    private static Genre genre;
     private Retrofit retrofitMovies;
     private Retrofit retrofitGenres;
 

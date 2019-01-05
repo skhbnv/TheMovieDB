@@ -62,6 +62,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Mo
         this.itemClickListener = itemClickListener;
     }
 
+
     public class MovieViewHolder extends RecyclerView.ViewHolder implements OnClickListener{
         private TextView mTitle;
         private TextView mRelease;

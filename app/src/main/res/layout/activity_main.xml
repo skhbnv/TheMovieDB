@@ -18,7 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/toolbarColor"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+            <LinearLayout
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_width="70dp">
+                <ImageView
+                    android:background="@drawable/funnel"
+                    android:layout_height="20dp"
+                    android:layout_width="20dp">
+
+                </ImageView>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
 
             <FrameLayout
             android:id="@+id/fragment_container"
